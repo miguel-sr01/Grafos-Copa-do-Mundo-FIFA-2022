@@ -23,8 +23,6 @@ def menu():
     print("8 - GRUPO H")
     print("0 - Encerrar Programa")
 
-
-
 class grafo_fase_de_grupos():
     def __init__(self, t1, t2, t3, t4, grupo):
 
@@ -54,7 +52,6 @@ class grafo_fase_de_grupos():
 
         plt.title(string)
         plt.show()
-
 
 class grafo_oitavas_de_final():
     def __init__(self, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16):
@@ -86,7 +83,7 @@ class grafo_quartas_de_final():
 
         self.g = ig.Graph([(0,1), (2,3), (4,5), (6,7)])
         self.g.vs["name"] = [t1, t2, t3, t4, t5, t6, t7, t8]
-        self.g.vs["pass"] = ["f", "t", "t", "f", "f","t", "t", "f", "t", "f", "t","f", "t", "f", "t", "f"]
+        self.g.vs["pass"] = ["f", "t", "t", "f", "f","t", "t", "f"]
         layout = self.g.layout("kk")
         fig, ax = plt.subplots()
         self.g.vs["label"] = self.g.vs["name"]
@@ -101,11 +98,60 @@ class grafo_quartas_de_final():
 
         ig.plot(self.g, layout=layout)
 
-        string = "COPA DO MUNDO FIFA 2022 - OITAVAS DE FINAL"
+        string = "COPA DO MUNDO FIFA 2022 - QUARTAS DE FINAL"
 
         plt.title(string)
         plt.show()
 
+class grafo_semi_final():
+    def __init__(self, t1, t2, t3, t4):
+
+        self.g = ig.Graph([(0,1), (2,3)])
+        self.g.vs["name"] = [t1, t2, t3, t4]
+        self.g.vs["pass"] = ["t", "f", "t", "f"]
+        layout = self.g.layout("kk")
+        fig, ax = plt.subplots()
+        self.g.vs["label"] = self.g.vs["name"]
+        color_dict = {"t": "green", "f": "red"}
+        self.g.vs["color"] = [color_dict[value] for value in self.g.vs["pass"]]
+
+        self.g.es["color"] = "black"
+
+
+        ig.plot(self.g, layout=layout, bbox=(300, 300), margin=20)
+        ig.plot(self.g, layout=layout, bbox=(300, 300), margin=20, target=ax) 
+
+        ig.plot(self.g, layout=layout)
+
+        string = "COPA DO MUNDO FIFA 2022 - SEMI FINAL"
+
+        plt.title(string)
+        plt.show()
+
+class grafo_final():
+    def __init__(self, t1, t2):
+
+        self.g = ig.Graph([(0,1)])
+        self.g.vs["name"] = [t1, t2]
+        self.g.vs["pass"] = ["t", "f"]
+        layout = self.g.layout("kk")
+        fig, ax = plt.subplots()
+        self.g.vs["label"] = self.g.vs["name"]
+        color_dict = {"t": "green", "f": "red"}
+        self.g.vs["color"] = [color_dict[value] for value in self.g.vs["pass"]]
+
+        self.g.es["color"] = "black"
+
+
+        ig.plot(self.g, layout=layout, bbox=(300, 300), margin=20)
+        ig.plot(self.g, layout=layout, bbox=(300, 300), margin=20, target=ax) 
+
+        ig.plot(self.g, layout=layout)
+
+        string = "COPA DO MUNDO FIFA 2022 - FINAL"
+
+        plt.title(string)
+        plt.show()
 
 def fase_de_grupos():
     menu()
@@ -138,6 +184,11 @@ def oitavas_de_final():
 def quartas_de_final():
     grafo_quartas_de_final("HOLANDA", "ARGENTINA", "CROÁCIA", "BRASIL", "INGLATERRA", "FRANÇA", "MARROCOS", "PORTUGAL")
 
+def semi_final():
+    grafo_semi_final("ARGENTINA", "CROÁCIA", "FRANÇA", "MARROCOS")
+
+def final():
+    grafo_final("ARGENTINA", "FRANÇA")
 
 def main():
     menu_geral()
@@ -150,6 +201,10 @@ def main():
             oitavas_de_final()
         case 3:
             quartas_de_final()
+        case 4:
+            semi_final()
+        case 5:
+            final()
 
 if __name__ == '__main__':
    main()
