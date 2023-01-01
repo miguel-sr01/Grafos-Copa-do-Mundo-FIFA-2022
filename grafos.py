@@ -1,6 +1,5 @@
 import igraph as ig
 import matplotlib.pyplot as plt
-import cairo
 
 def menu_geral():
     print("Selecione uma etapa da Copa do Mundo FIFA 2022:")
@@ -148,7 +147,7 @@ class grafo_final():
 
         ig.plot(self.g, layout=layout)
 
-        string = "COPA DO MUNDO FIFA 2022 - FINAL"
+        string = "COPA DO MUNDO FIFA 2022 - FINAL \n  Argentina 3 (4x2) 3 França"
 
         plt.title(string)
         plt.show()
@@ -157,7 +156,7 @@ def fase_de_grupos():
     menu()
     opcao = -1
     while opcao != 0:
-        opcao = int(input("\nOpção: "))
+        opcao = int(input("\nOpção de Grupo: "))
         match opcao:
             case 1:
                 grafo_fase_de_grupos("HOLANDA", "SENEGAL", "EQUADOR", "CATAR", "A")
@@ -193,18 +192,21 @@ def final():
 def main():
     menu_geral()
     opcao_geral = -1
-    opcao_geral = int(input("\nOpção: "))
-    match opcao_geral:
-        case 1:
-            fase_de_grupos()
-        case 2:
-            oitavas_de_final()
-        case 3:
-            quartas_de_final()
-        case 4:
-            semi_final()
-        case 5:
-            final()
+    while opcao_geral != 0:
+        opcao_geral = int(input("\nOpção Geral: "))
+        match opcao_geral:
+            case 1:
+                fase_de_grupos()
+            case 2:
+                oitavas_de_final()
+            case 3:
+                quartas_de_final()
+            case 4:
+                semi_final()
+            case 5:
+                final()
+            case 0:
+                break
 
 if __name__ == '__main__':
    main()
