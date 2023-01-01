@@ -8,6 +8,7 @@ def menu_geral():
     print("3 - QUARTAS DE FINAL")
     print("4 - SEMI FINAL")
     print("5 - FINAL")
+    print("6 - TERCEIRO LUGAR")
     print("0 - Encerrar Programa")
 
 def menu():
@@ -132,7 +133,7 @@ class grafo_final():
 
         self.g = ig.Graph([(0,1)])
         self.g.vs["name"] = [t1, t2]
-        self.g.vs["pass"] = ["t", "f"]
+        self.g.vs["pass"] = ["f", "t"]
         layout = self.g.layout("kk")
         fig, ax = plt.subplots()
         self.g.vs["label"] = self.g.vs["name"]
@@ -148,6 +149,31 @@ class grafo_final():
         ig.plot(self.g, layout=layout)
 
         string = "COPA DO MUNDO FIFA 2022 - FINAL \n  Argentina 3 (4x2) 3 França"
+
+        plt.title(string)
+        plt.show()
+
+class grafo_terceiro_lugar():
+    def __init__(self, t1, t2):
+
+        self.g = ig.Graph([(0,1)])
+        self.g.vs["name"] = [t1, t2]
+        self.g.vs["pass"] = ["f", "t"]
+        layout = self.g.layout("kk")
+        fig, ax = plt.subplots()
+        self.g.vs["label"] = self.g.vs["name"]
+        color_dict = {"t": "green", "f": "red"}
+        self.g.vs["color"] = [color_dict[value] for value in self.g.vs["pass"]]
+
+        self.g.es["color"] = "black"
+
+
+        ig.plot(self.g, layout=layout, bbox=(300, 300), margin=20)
+        ig.plot(self.g, layout=layout, bbox=(300, 300), margin=20, target=ax) 
+
+        ig.plot(self.g, layout=layout)
+
+        string = "COPA DO MUNDO FIFA 2022 - TERCEIRO LUGAR \n  Croácia 2 X 1 Marrocos"
 
         plt.title(string)
         plt.show()
@@ -186,8 +212,11 @@ def quartas_de_final():
 def semi_final():
     grafo_semi_final("ARGENTINA", "CROÁCIA", "FRANÇA", "MARROCOS")
 
+def terceiro_lugar():
+    grafo_terceiro_lugar("MARROCOS", "CROÁCIA")
+
 def final():
-    grafo_final("ARGENTINA", "FRANÇA")
+    grafo_final("FRANÇA", "ARGENTINA")
 
 def main():
     menu_geral()
@@ -205,6 +234,8 @@ def main():
                 semi_final()
             case 5:
                 final()
+            case 6:
+                terceiro_lugar()
             case 0:
                 break
 
