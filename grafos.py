@@ -2,6 +2,7 @@ import igraph as ig
 import matplotlib.pyplot as plt
 
 def menu_geral():
+    print("\n\n*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*")
     print("Selecione uma etapa da Copa do Mundo FIFA 2022:")
     print("1 - FASE DE GRUPOS")
     print("2 - OITAVAS DE FINAL")
@@ -11,6 +12,7 @@ def menu_geral():
     print("6 - TERCEIRO LUGAR")
     print("7 - MATA-MATA DA COPA")
     print("0 - Encerrar Programa")
+    print("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*")
 
 def menu():
     print("Selecione um grupo da Copa do Mundo FIFA 2022:")
@@ -22,7 +24,7 @@ def menu():
     print("6 - GRUPO F")
     print("7 - GRUPO G")
     print("8 - GRUPO H")
-    print("0 - Encerrar Programa")
+    print("0 - Voltar para Menu Geral")
 
 class grafo_fase_de_grupos():
     def __init__(self, t1, t2, t3, t4, grupo):
@@ -243,7 +245,7 @@ def fase_de_grupos():
     menu()
     opcao = -1
     while opcao != 0:
-        opcao = int(input("\nOpção de Grupo: "))
+        opcao = int(input("\nOpção: "))
         match opcao:
             case 1:
                 grafo_fase_de_grupos("HOLANDA", "SENEGAL", "EQUADOR", "CATAR", "A")
@@ -262,6 +264,7 @@ def fase_de_grupos():
             case 8:
                 grafo_fase_de_grupos("PORTUGAL", "COREIA DO SUL", "URUGUAI", "GANA", "H")
             case 0:
+                menu_geral()
                 break
 
 def oitavas_de_final():
@@ -281,7 +284,6 @@ def final():
 
 def mata_mata():
     digrafo_mata_mata("HOLANDA", "EUA", "ARGENTINA", "AUSTRÁLIA", "JAPÃO", "CROÁCIA", "BRASIL", "COREIA DO SUL", "INGLATERRA", "SENEGAL", "FRANÇA", "POLÔNIA", "MARROCOS", "ESPANHA", "PORTUGAL", "SUIÇA")
-
 
 def main():
     menu_geral()
