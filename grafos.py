@@ -9,6 +9,7 @@ def menu_geral():
     print("4 - SEMI FINAL")
     print("5 - FINAL")
     print("6 - TERCEIRO LUGAR")
+    print("7 - MATA-MATA DA COPA")
     print("0 - Encerrar Programa")
 
 def menu():
@@ -36,12 +37,29 @@ class grafo_fase_de_grupos():
         color_dict = {"t": "green", "f": "red"}
         self.g.vs["color"] = [color_dict[value] for value in self.g.vs["pass"]]
 
-        self.g.es[0]["color"] = "orange"
-        self.g.es[1]["color"] = "purple"
-        self.g.es[2]["color"] = "blue"
-        self.g.es[3]["color"] = "blue"
-        self.g.es[4]["color"] = "purple"
-        self.g.es[5]["color"] = "orange"
+        if grupo == 'A' or grupo == 'D' or grupo == 'G':
+            self.g.es[0]["color"] = "orange"
+            self.g.es[1]["color"] = "purple"
+            self.g.es[2]["color"] = "blue"
+            self.g.es[3]["color"] = "blue"
+            self.g.es[4]["color"] = "purple"
+            self.g.es[5]["color"] = "orange"
+        elif grupo == 'B' or grupo == 'E' or grupo == 'H':
+            self.g.es[0]["color"] = "black"
+            self.g.es[1]["color"] = "blue"
+            self.g.es[2]["color"] = "brown"
+            self.g.es[3]["color"] = "brown"
+            self.g.es[4]["color"] = "blue"
+            self.g.es[5]["color"] = "black"
+
+        else:                      
+            self.g.es[0]["color"] = "yellow"
+            self.g.es[1]["color"] = "red"
+            self.g.es[2]["color"] = "green"
+            self.g.es[3]["color"] = "green"
+            self.g.es[4]["color"] = "red"
+            self.g.es[5]["color"] = "yellow"
+
 
         ig.plot(self.g, layout=layout, bbox=(300, 300), margin=20)
         ig.plot(self.g, layout=layout, bbox=(300, 300), margin=20, target=ax) 
@@ -178,6 +196,49 @@ class grafo_terceiro_lugar():
         plt.title(string)
         plt.show()
 
+class digrafo_mata_mata():
+    def __init__(self, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16):
+
+        self.g = ig.Graph(directed=True)
+        self.g.add_vertices(16)
+        self.g.add_edges([(1,0), (0,2), (3,2), (5,2), (12,5), (4,5), (6,5), (10,2), (7,6), (9,8), (11,10), (12,10), (13,12), (15,14), (8,10), (14,12)])
+
+        self.g.vs["name"] = [t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16]
+        layout = self.g.layout("kk")
+        fig, ax = plt.subplots()
+        self.g.vs["label"] = self.g.vs["name"]
+
+        self.g.vs["color"] = "gray"
+
+        self.g.es[0]["color"] = "green"
+        self.g.es[1]["color"] = "blue"
+        self.g.es[2]["color"] = "green"
+        self.g.es[3]["color"] = "red"
+        self.g.es[4]["color"] = "purple"
+        self.g.es[5]["color"] = "green"
+        self.g.es[6]["color"] = "blue"
+        self.g.es[7]["color"] = "purple"
+        self.g.es[8]["color"] = "green"
+        self.g.es[9]["color"] = "green"
+        self.g.es[10]["color"] = "green"
+        self.g.es[11]["color"] = "red"
+        self.g.es[12]["color"] = "green"
+        self.g.es[13]["color"] = "green"
+        self.g.es[14]["color"] = "blue"
+        self.g.es[15]["color"] = "blue"
+
+
+
+        ig.plot(self.g, layout=layout, bbox=(300, 300), margin=20)
+        ig.plot(self.g, layout=layout, bbox=(300, 300), margin=20, target=ax) 
+
+        ig.plot(self.g, layout=layout)
+
+        string = "COPA DO MUNDO FIFA 2022 - MATA-MATA"
+
+        plt.title(string)
+        plt.show()
+
 def fase_de_grupos():
     menu()
     opcao = -1
@@ -218,6 +279,10 @@ def terceiro_lugar():
 def final():
     grafo_final("FRANÇA", "ARGENTINA")
 
+def mata_mata():
+    digrafo_mata_mata("HOLANDA", "EUA", "ARGENTINA", "AUSTRÁLIA", "JAPÃO", "CROÁCIA", "BRASIL", "COREIA DO SUL", "INGLATERRA", "SENEGAL", "FRANÇA", "POLÔNIA", "MARROCOS", "ESPANHA", "PORTUGAL", "SUIÇA")
+
+
 def main():
     menu_geral()
     opcao_geral = -1
@@ -236,6 +301,8 @@ def main():
                 final()
             case 6:
                 terceiro_lugar()
+            case 7:
+                mata_mata()
             case 0:
                 break
 
